@@ -1,4 +1,6 @@
 variable "deployment_name" {
+  type = string
+  description = "Deployment Name"
   default = "ETLChallenge"
 }
 
@@ -13,17 +15,15 @@ variable "from_email" {
 }
 
 variable "datasource_nyt" {
-  default = {
-    staging = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv"
-    production = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv"
-  }
+  type = string
+  description = "NYT Datasource"
+  default = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv"
 }
 
 variable "datasource_jhk" {
-  default = {
-    staging = "https://raw.githubusercontent.com/datasets/covid-19/master/data/time-series-19-covid-combined.csv?opt_id=oeu1600640557504r0.1891205861858345"
-    production = "https://raw.githubusercontent.com/datasets/covid-19/master/data/time-series-19-covid-combined.csv?opt_id=oeu1600640557504r0.1891205861858345"
-  }
+  type = string
+  description = "JH Data source"
+  default = "https://raw.githubusercontent.com/datasets/covid-19/master/data/time-series-19-covid-combined.csv?opt_id=oeu1600640557504r0.1891205861858345"
 }
 
 variable "commonlib" {
@@ -43,7 +43,7 @@ variable "gkey" {
 
 variable "lambda_func" {
   type = list
-  descrption = "Lambda Functions"
+  description = "Lambda Functions"
   default = ["lambda_etl","lambda_ddbstreams"]
 }
 

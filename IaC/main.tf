@@ -32,8 +32,8 @@ resource "aws_lambda_function" "lambda_etl" {
   layers           = ["arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:layer:${var.commonlib}"]
   environment {
     variables = {
-      nyt            = var.datasource_nyt[terraform.workspace]
-      jhk            = var.datasource_jhk[terraform.workspace]
+      nyt            = var.datasource_nyt
+      jhk            = var.datasource_jhk
       ddb_table_name = aws_dynamodb_table.etlchallenge_ddb.id
     }
   }
