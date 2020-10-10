@@ -5,7 +5,7 @@ data "aws_region" "current" {}
 resource "aws_cloudwatch_event_rule" "lambda_trigger" {
   name_prefix = var.deployment_name
   description         = "Lambda trigger to extract data from sources"
-  schedule_expression = "rate(5 minutes)"
+  schedule_expression = "cron(30 5 * * ? *)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda" {
