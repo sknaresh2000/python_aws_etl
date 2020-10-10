@@ -95,7 +95,7 @@ def lambda_handler(event,context):
                     break
 
             wk1.set_dataframe(df=df, start=(len(wk1.get_all_records())+2,1), copy_head=False, extend=True)
-            wk1.sort_range(start='B2',end='F'+str(wk1.rows),basecolumnindex=0,sortorder='ASCENDING')
+            wk1.sort_range(start='A2',end='F'+str(wk1.rows),basecolumnindex=1,sortorder='ASCENDING')
 
             #HTML Email with details
             with open(sys.path[0]+'/email_template.html',"r") as f:
