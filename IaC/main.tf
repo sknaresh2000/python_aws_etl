@@ -94,7 +94,7 @@ resource "aws_dynamodb_table" "etlchallenge_ddb" {
   range_key        = "date"
 
   attribute {
-    name = "country_reported_month"
+    name = "reported_month"
     type = "S"
   }
 

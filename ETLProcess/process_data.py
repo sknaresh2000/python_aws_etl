@@ -47,7 +47,7 @@ def lambda_handler(event,context):
     merged_covid_data = dtmodule.convert_to_datatype(merged_covid_data,['date'],"DATE")
 
     #Insert a new column for easy retrieval from db
-    merged_covid_data.insert(loc=0,column='country_reported_month',value=merged_covid_data['date'].dt.strftime("%b-%Y")+':'+merged_covid_data['Country/Region'])
+    merged_covid_data.insert(loc=0,column='country_reported_month',value=merged_covid_data['date'].dt.strftime("%b-%Y"))
     print("Inserted Partition key value")
 
     #Get the first and last reported info
@@ -67,7 +67,7 @@ def lambda_handler(event,context):
         month_year_filter = (date.today().replace(day=15) - timedelta(days=i)).strftime("%b-%Y")
         try:
             query_response = covid_data_table.query(
-                KeyConditionExpression=Key('country_reported_month').eq(month_year_filter+":US"),
+                KeyConditionExpression=Key('reported_month').eq(month_year_filter),
                 Limit=1,
                 ScanIndexForward=False,
                 ReturnConsumedCapacity='TOTAL'
@@ -86,7 +86,7 @@ def lambda_handler(event,context):
             else:
                 i += 30
                 #First Bulk upload if it doesnt find any data.
-                if start_of_month == month_year_filter+":US":
+                if start_of_month == month_year_filter:
                     print("First time upload. Pushing all data")
                     push_to_db = True
                 else:
