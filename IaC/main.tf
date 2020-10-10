@@ -90,7 +90,7 @@ resource "aws_dynamodb_table" "etlchallenge_ddb" {
   billing_mode     = "PAY_PER_REQUEST"
   stream_enabled   = true
   stream_view_type = "NEW_IMAGE"
-  hash_key         = "country_reported_month"
+  hash_key         = "reported_month"
   range_key        = "date"
 
   attribute {
