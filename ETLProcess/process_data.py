@@ -47,12 +47,12 @@ def lambda_handler(event,context):
     merged_covid_data = dtmodule.convert_to_datatype(merged_covid_data,['date'],"DATE")
 
     #Insert a new column for easy retrieval from db
-    merged_covid_data.insert(loc=0,column='country_reported_month',value=merged_covid_data['date'].dt.strftime("%b-%Y"))
+    merged_covid_data.insert(loc=0,column='reported_month',value=merged_covid_data['date'].dt.strftime("%b-%Y"))
     print("Inserted Partition key value")
 
     #Get the first and last reported info
     last_reported_date = merged_covid_data.tail(1)['date'].values[0]
-    start_of_month = merged_covid_data.head(1)['country_reported_month'].values[0]
+    start_of_month = merged_covid_data.head(1)['reported_month'].values[0]
 
     #Initiate connection to dynamodb
     session = boto3.session.Session()
