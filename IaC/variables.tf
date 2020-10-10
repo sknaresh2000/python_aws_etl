@@ -10,6 +10,7 @@ variable "region" {
 }
 
 variable "from_email" {
+  type = map
   description = "Email Notification"
 }
 
@@ -31,6 +32,7 @@ variable "commonlib" {
 }
 
 variable "gsheets" {
+  type = map
   description = "Google Sheet to connect to Tableau"
 }
 
@@ -46,5 +48,6 @@ variable "lambda_func" {
 }
 
 variable "workspace_iam_roles" {
+  type = map
   description = "IAM Role to assume for deployment"
 }
